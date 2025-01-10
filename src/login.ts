@@ -1,20 +1,19 @@
-import supabase from "./init.js";
- 
+import supabaseClient from "./init.js";
+
 const signIn = async () => {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: process.env.SUPABASE_USER || "",
-    password: process.env.SUPABASE_PASSWORD || "",
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: "durand.thomas765@gmail.com",
+    password: "iimtodolist",
   });
- 
+
   if (error) {
     console.error(error);
     return false;
   }
- 
+
   return data;
 };
- 
+
 const user = signIn();
 
 export default user;
-

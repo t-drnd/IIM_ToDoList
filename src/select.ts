@@ -1,4 +1,4 @@
-import supabase from "./init.js";
+import supabaseClient from "./init.js";
 import user from "./login.js";
 
 const getUsers = async () => {
@@ -7,7 +7,7 @@ const getUsers = async () => {
     return false;
   }
 
-  const { data, error } = await supabase.from("user").select("*");
+  const { data, error } = await supabaseClient.from("user").select("*");
 
   if (error) {
     console.error(error);

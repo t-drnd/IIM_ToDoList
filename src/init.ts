@@ -1,12 +1,7 @@
-import * as dotenv from "dotenv";
-dotenv.config(); // Charge le fichier .env
-
-import { createClient } from "@supabase/supabase-js";
- 
-const supabaseUrl: string = process.env.SUPABASE_URL || "";
-const supabaseKey: string = process.env.SUPABASE_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseKey);
- 
-console.log(supabase);
-
-export default supabase;
+import "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"; // Import via CDN
+// dotenv n'est plus accessible donc on met les accès en brut
+const supabaseUrl: string = "https://ihsqxvtczrhhfuatnppb.supabase.co";
+const supabaseKey: string =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imloc3F4dnRjenJoaGZ1YXRucHBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0OTQxMjcsImV4cCI6MjA1MjA3MDEyN30.wY6n9YjX32vpYhVNVxSB1mTTkVHq2t3OmRarRkEaSIU";
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey); // Erreur TS : supabase n'est pas reconnu
+export default supabaseClient; // Export de supabaseClient

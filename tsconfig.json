@@ -4,7 +4,12 @@
       "target": "ES2021",
       "noEmitOnError": false,
       "strict": true,
-      "moduleResolution": "node"
+      "moduleResolution": "node",
+      "paths": {
+      "undici-types": [
+        "./node_modules/undici-types/index.d.ts"
+      ],
+    }
     },
     "include": [
       "src/**/*.ts"
