@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+  </head>
+  <body>
+    <div class="global-container">
+      <div class="navbar">
+        <h3>ToDo List</h3>
+        <ul class="navbar-container">
+          <li class="completed-container">
+            <i class="navlii fa-solid fa-circle-check"></i>
+            <p id="completed" class="navlip completed">Terminé</p>
+            <div class="numberdiv"></div>
+          </li>
+          <li class="inprogress-container">
+            <i class="fa-solid fa-bars-progress"></i>
+            <p id="inprogress" class="navlip inprogress">
+              En cours de réalisation
+            </p>
+            <div class="numberdiv"></div>
+          </li>
+          <li class="notstarted-container">
+            <i class="fa-solid fa-hourglass-start"></i>
+            <p id="notstarted" class="navlip notstarted">Non commencé</p>
+            <div class="numberdiv"></div>
+          </li>
+          <li class="crucial-container">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <p id="crucial" class="navlip crucial">Crucial</p>
+            <div class="numberdiv"></div>
+          </li>
+          <li class="veryimp-container">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <p id="veryimp" class="navlip veryimp">Très Important</p>
+            <div class="numberdiv"></div>
+          </li>
+          <li class="imp-container">
+            <i class="fa-solid fa-exclamation"></i>
+            <p id="imp" class="navlip imp">Important</p>
+            <div class="numberdiv"></div>
+          </li>
+          <li class="peuimp-container">
+            <i class="fa-solid fa-battery-quarter"></i>
+            <p id="peuimp" class="navlip peuimp">Peu Important</p>
+            <div class="numberdiv"></div>
+          </li>
+          <li class="facultatif-container">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <p id="facultatif" class="navlip facultatif">Facultatif</p>
+            <div class="numberdiv"></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="main">
+        <div class="topbar">
+          <h1>Bonjour user.firstname</h1>
+          <button>
+            <i class="logicon fa-solid fa-right-to-bracket"></i>Login
+          </button>
+        </div>
+        <div class="addtask">
+          <button class="addtaskbutton" id="addtaskbutton">
+            <i class="fa-solid fa-plus"></i>Ajouter une tâche
+          </button>
+        </div>
+        <div class="addtaskpopupcontent" id="addtaskpopupcontent">
+          <div class="popupoverlay" id="popupoverlay"></div>
+          <div class="addtaskpopup" id="addtaskpopup">
+            <div class="closepopup">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+            <h3>Ajouter une tâche</h3>
+            <form action="" method="POST">
+              <div class="titrediv">
+                <span>
+                  <i class="fa-solid fa-pen"></i>
+                  Nom de la tâche:
+                </span>
+                <input
+                  type="text"
+                  name="title"
+                  class="title"
+                  id="title"
+                  placeholder="Titre"
+                  required
+                />
+              </div>
+              <div class="descdiv">
+                <span>
+                  <i class="fa-solid fa-newspaper"></i>
+                  Description
+                </span>
+                <input
+                  type="text"
+                  name="desc"
+                  class="desc"
+                  id="desc"
+                  placeholder="Description"
+                  required
+                />
+              </div>
+              <div class="datediv">
+                <span>
+                  <i class="fa-regular fa-calendar"></i>
+                  Date de deadline
+                </span>
+                <input
+                  type="text"
+                  name="date"
+                  class="date"
+                  id="date"
+                  placeholder="Date de deadline"
+                  required
+                />
+              </div>
+              <div class="priodiv">
+                <span>
+                  <i class="fa-solid fa-lightbulb"></i>
+                  Priorité
+                </span>
+                <select
+                  name="priorites"
+                  class="priorites"
+                  id="priorite"
+                  required
+                >
+                  <option value="" disabled selected hidden>
+                    Choisir une priorité
+                  </option>
+                  <option value="Crucial">Crucial</option>
+                  <option value="Très Important">Très Important</option>
+                  <option value="Important">Important</option>
+                  <option value="Peu important">Peu important</option>
+                  <option value="Facultatif">Facultatif</option>
+                </select>
+              </div>
+              <div class="submitdiv">
+                <button type="submit">J'ajoute cette tâche</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="task-container">
+          <table class="task-table">
+            <thead class="task-table-head">
+              <tr>
+                <th>Prog.</th>
+                <th>Task</th>
+                <th>Priority</th>
+                <th>Deadline</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="./lib/taskformpopup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        flatpickr("#date", {
+          dateFormat: "Y-m-d",
+          altInput: true,
+          altFormat: "F j, Y",
+          locale: "fr",
+        });
+      });
+    </script>
+  </body>
+</html>
