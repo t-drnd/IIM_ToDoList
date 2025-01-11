@@ -43,3 +43,31 @@ registerForm?.addEventListener("submit", async (event) => {
     console.error("Échec de l'inscription !");
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Sélectionne le formulaire de connexion
+  const loginForm = document.querySelector("form");
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault(); // Empêche la soumission classique du formulaire
+
+      const email = document.querySelector("input[type='email']").value;
+      const password = document.querySelector("input[type='password']").value;
+
+      console.log("Connexion avec email:", email, "et mot de passe:", password);
+
+      // Appelle la fonction de connexion
+      const user = await signIn(email, password);
+
+      if (user) {
+        console.log("Connexion réussie !");
+        window.location.href = "/index.html"; // Redirige après connexion réussie
+      } else {
+        console.error("Échec de la connexion");
+      }
+    });
+  } else {
+    console.error("Le formulaire de connexion n'a pas été trouvé !");
+  }
+});
