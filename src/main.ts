@@ -24,23 +24,22 @@ const registerForm = document.querySelector("#register-form");
 registerForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const email = (document.querySelector("#register-email") as HTMLInputElement)
-    ?.value;
-  const password = (
-    document.querySelector("#register-password") as HTMLInputElement
-  )?.value;
   const firstname = (
     document.querySelector("#register-firstname") as HTMLInputElement
   )?.value;
   const lastname = (
     document.querySelector("#register-lastname") as HTMLInputElement
   )?.value;
+  const email = (document.querySelector("#register-email") as HTMLInputElement)
+    ?.value;
+  const password = (
+    document.querySelector("#register-password") as HTMLInputElement
+  )?.value;
 
-  const userData = await signUp(email, password, firstname, lastname);
+  const userData = await signUp(firstname, lastname, email, password);
   if (userData) {
     console.log("Utilisateur inscrit avec succès !");
   } else {
     console.error("Échec de l'inscription !");
   }
 });
-

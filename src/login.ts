@@ -14,6 +14,15 @@ const signIn = async () => {
   return data;
 };
 
-const user = signIn();
+const handleSignIn = async () => {
+  const user = await signIn();
 
-export default user;
+  if (user) {
+    console.log("Connexion réussie :", user);
+    window.location.href = "./index.html";
+  } else {
+    console.error("Échec de la connexion !");
+  }
+};
+
+handleSignIn();

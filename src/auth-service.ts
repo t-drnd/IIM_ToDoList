@@ -30,13 +30,12 @@ import supabaseClient from "./init.js";
 //   }
 // };
 export const signUp = async (
-  email: string,
-  password: string,
   firstname: string,
-  lastname: string
+  lastname: string,
+  email: string,
+  password: string
 ) => {
   try {
-    // Créer un utilisateur via Supabase Auth
     const { data: authData, error: authError } =
       await supabaseClient.auth.signUp({
         email,
@@ -44,12 +43,11 @@ export const signUp = async (
       });
     if (authError) throw authError;
 
-    // Ajouter les informations utilisateur dans la table `users`
     const { data: userData, error: userError } = await supabaseClient
-      .from("user") // Nom de votre table des utilisateurs
+      .from("user")
       .insert([
         {
-          id: authData.user?.id, // Utiliser l'ID généré par Supabase Auth
+          id: authData.user?.id,
           firstname,
           lastname,
           email,
@@ -67,25 +65,43 @@ export const signUp = async (
 
 export const signIn = async (email: string, password: string) => {
   try {
+    // Tentative de connexion avec email et mot de passe
     const { data: authData, error: authError } =
       await supabaseClient.auth.signInWithPassword({
         email,
         password,
       });
-    if (authError) throw authError;
 
-    // Récupérer les informations utilisateur dans la table `users`
+    if (authError) {
+      console.error("Erreur d'authentification:", authError);
+      return null;
+    }
+
+    console.log("Données d'authentification:", authData);
+
+    // Vérification si l'utilisateur existe dans la base de données
     const { data: userData, error: userError } = await supabaseClient
       .from("user")
       .select("*")
       .eq("id", authData.user?.id)
       .single();
-    if (userError) throw userError;
 
-    console.log("Connexion réussie :", userData);
+    if (userError) {
+      console.error(
+        "Erreur de récupération des données utilisateur:",
+        userError
+      );
+      return null;
+    }
+
+    console.log("Utilisateur récupéré avec succès :", userData);
+
+    // Redirection après connexion réussie
+    window.location.href = "/index.html"; // Assurez-vous que cette URL est correcte
+
     return userData;
   } catch (error) {
-    console.error("Erreur de connexion :", error);
+    console.error("Erreur de connexion générale:", error);
     return null;
   }
 };
