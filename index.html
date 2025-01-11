@@ -69,10 +69,12 @@
 
       <div class="main">
         <div class="topbar">
-          <h1>Bonjour user.firstname</h1>
-          <button>
-            <i class="logicon fa-solid fa-right-to-bracket"></i>Login
-          </button>
+          <div id="bjruser"></div>
+          <a href="login.html" id="loginlogoutbutton">
+            <button>
+              <i class="logicon fa-solid fa-right-to-bracket"></i>Login
+            </button>
+          </a>
         </div>
         <div class="addtask">
           <button class="addtaskbutton" id="addtaskbutton">
@@ -173,6 +175,7 @@
       </div>
     </div>
 
+    <script src="./lib/init.js"></script>
     <script src="./lib/taskformpopup.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
@@ -183,6 +186,42 @@
           altFormat: "F j, Y",
           locale: "fr",
         });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const button = document.getElementById("loginlogoutbutton");
+
+        const token = localStorage.getItem("access_token");
+
+        if (token) {
+          button.innerHTML = `
+      <button>
+        <i class="logicon fa-solid fa-right-from-bracket"></i>Logout
+      </button>
+    `;
+          button.href = "#";
+        } else {
+          button.innerHTML = `
+      <button>
+        <i class="logicon fa-solid fa-right-to-bracket"></i>Login
+      </button>
+    `;
+          button.href = "login.html";
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const welcomeMessage = document.getElementById("bjruser");
+        const session = supabase.auth.session();
+
+        if (session) {
+          const token = session.access_token;
+          welcomeMessage.innerHTML = `Bonjour, ${session.user.firstname}`;
+        } else {
+          welcomeMessage.innerHTML = "Bonjour, utilisateur non connecté";
+        }
       });
     </script>
   </body>
