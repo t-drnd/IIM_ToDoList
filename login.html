@@ -38,30 +38,34 @@
             </div>
           </form>
         </div>
-
         <div class="form-box register">
           <h2>S'inscrire</h2>
-          <form action="#">
+          <form id="register-form">
             <div class="input-box">
               <span class="icon"><ion-icon name="person"></ion-icon></span>
-              <input type="text" required />
+              <input type="text" id="register-firstname" required />
+              <label>Prénom</label>
+            </div>
+            <div class="input-box">
+              <span class="icon"><ion-icon name="person"></ion-icon></span>
+              <input type="text" id="register-lastname" required />
               <label>Nom</label>
             </div>
             <div class="input-box">
               <span class="icon"><ion-icon name="mail"></ion-icon></span>
-              <input type="email" required />
+              <input type="email" id="register-email" required />
               <label>Email</label>
             </div>
             <div class="input-box">
               <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-              <input type="password" required />
+              <input type="password" id="register-password" required />
               <label>Mot de passe</label>
             </div>
             <div class="remember-forgot">
-              <label
-                ><input type="checkbox" />Je suis d'accord avec les termes et
-                les conditions</label
-              >
+              <label>
+                <input type="checkbox" required />
+                Je suis d'accord avec les termes et les conditions
+              </label>
             </div>
             <button type="submit" class="btn">S'inscrire</button>
             <div class="login-register">
@@ -71,7 +75,7 @@
               </p>
             </div>
           </form>
-        </div>
+        </div>        
       </div>
     </section>
     <script type="module" src="./lib/main.js"></script>
