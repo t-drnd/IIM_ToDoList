@@ -10,19 +10,31 @@ const signIn = async () => {
     console.error(error);
     return false;
   }
-
-  return data;
+  return data.user; 
 };
 
 const handleSignIn = async () => {
-  const user = await signIn();
-
-  if (user) {
-    console.log("Connexion réussie :", user);
-    window.location.href = "./index.html";
-  } else {
-    console.error("Échec de la connexion !");
-  }
+    const signedInUser = await signIn();
+    if (signedInUser) {
+        console.log("Connexion réussie :", signedInUser);
+        window.location.href = "./index.html";
+    } else {
+        console.error("Échec de la connexion !");
+    }
 };
 
+// const handleSignIn = async () => {
+//   const user = await signIn();
+
+//   if (user) {
+//     console.log("Connexion réussie :", user);
+//     window.location.href = "./index.html";
+//   } else {
+//     console.error("Échec de la connexion !");
+//   }
+// };
+
 handleSignIn();
+export { signIn, handleSignIn };
+
+

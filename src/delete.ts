@@ -1,8 +1,8 @@
 import supabaseClient from "./init.js";
-import user from "./login.js";
+import { handleSignIn } from "./login.js";
 
 const deleteUser = async () => {
-  const userLogged = await user;
+  const userLogged = await handleSignIn;
   if (!userLogged) {
     return false;
   }
@@ -16,3 +16,4 @@ const deleteUser = async () => {
 };
 
 const userDeleted = deleteUser();
+handleSignIn();

@@ -1,8 +1,8 @@
 import supabase from "./../init.js";
-import user from "./../login.js";
+import { handleSignIn } from "./../login.js";
 
 const getUser = async (id: string) => {
-  const userLogged = await user;
+  const userLogged = await handleSignIn;
   if (!userLogged) {
     return false;
   }
@@ -23,7 +23,7 @@ const getUser = async (id: string) => {
 };
 
 const insertComment = async (userId: string, comment: string) => {
-  const userLogged = await user;
+  const userLogged = await handleSignIn;
   if (!userLogged) {
     return false;
   }
@@ -51,3 +51,5 @@ const commentInserted = insertComment(
   "a76e2b77-131b-4042-9dd4-f91a0732a8e6",
   "Hello World"
 );
+
+handleSignIn();

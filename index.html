@@ -175,51 +175,64 @@
       </div>
     </div>
 
-    <script src="./lib/init.js"></script>
-    <script src="./lib/taskformpopup.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        flatpickr("#date", {
-          dateFormat: "Y-m-d",
-          altInput: true,
-          altFormat: "F j, Y",
-          locale: "fr",
-        });
-      });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const button = document.getElementById("loginlogoutbutton");
+    <!-- Charge le script init.js avant les autres scripts -->
+    <script type="module" src="./lib/init.js"></script>
+    <script type="module" src="./lib/main.js"></script>
 
-        const token = localStorage.getItem("access_token");
-
-        if (token) {
-          button.innerHTML = `
-      <button>
-        <i class="logicon fa-solid fa-right-from-bracket"></i>Logout
-      </button>
-    `;
-          button.href = "#";
+    <!-- Ensuite, chargez les autres scripts qui utilisent supabaseClient -->
+    <script type="module" src="./lib/auth-service.js"></script>
+    <script type="module" src="./lib/taskformpopup.js"></script>
+    <!-- <script type="module">
+      import { getSession } from "./lib/auth_service.js";
+    
+      // Vérifiez si l'utilisateur est connecté et récupérez ses informations
+      (async () => {
+        const user = await getSession();
+        if (user) {
+          document.getElementById("userName").innerText = `Bonjour, ${user.first_name} ${user.last_name}`;
         } else {
-          button.innerHTML = `
-      <button>
-        <i class="logicon fa-solid fa-right-to-bracket"></i>Login
-      </button>
-    `;
-          button.href = "login.html";
+          document.getElementById("userName").innerText = "Bonjour, utilisateur non connecté";
         }
-      });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
+      })();
+    </script> -->
+    <script type="module">
+      import supabaseClient from "./lib/init.js";
+      document.addEventListener("DOMContentLoaded", async () => {
         const welcomeMessage = document.getElementById("bjruser");
-        const session = supabase.auth.session();
 
-        if (session) {
-          const token = session.access_token;
-          welcomeMessage.innerHTML = `Bonjour, ${session.user.firstname}`;
-        } else {
+        try {
+          const { data: sessionData, error: sessionError } =
+            await supabaseClient.auth.getSession();
+          if (sessionError) throw sessionError;
+
+          const session = sessionData?.session;
+
+          if (session) {
+            const { data: userData, error: userError } = await supabaseClient
+              .from("user")
+              .select("firstname")
+              .eq("id", session.user.id)
+              .single();
+
+            if (userError) {
+              console.error(
+                "Erreur lors de la récupération des données utilisateur :",
+                userError
+              );
+              welcomeMessage.innerHTML = "Bonjour, utilisateur non connecté";
+            } else {
+              console.log("Données utilisateur récupérées :", userData);
+              welcomeMessage.innerHTML = `Bonjour, ${userData.firstname}`;
+            }
+          } else {
+            console.warn("Aucune session active trouvée.");
+            welcomeMessage.innerHTML = "Bonjour, utilisateur non connecté";
+          }
+        } catch (error) {
+          console.error(
+            "Erreur inattendue lors de la gestion de la session :",
+            error
+          );
           welcomeMessage.innerHTML = "Bonjour, utilisateur non connecté";
         }
       });

@@ -1,8 +1,8 @@
 import supabaseClient from "./init.js";
-import user from "./login.js";
+import { handleSignIn } from "./login.js";
 
 const getUsers = async () => {
-  const userLogged = await user;
+  const userLogged = await handleSignIn;
   if (!userLogged) {
     return false;
   }
@@ -19,3 +19,4 @@ const getUsers = async () => {
 };
 
 const users = getUsers();
+handleSignIn();

@@ -1,9 +1,9 @@
 import supabaseClient from "./init.js";
-import user from "./login.js";
+import { handleSignIn } from "./login.js";
 import { hashPassword } from "./hash.js";
 
 const updateUser = async () => {
-  const userLogged = await user;
+  const userLogged = await handleSignIn;
   if (!userLogged) {
     return false;
   }
@@ -27,3 +27,4 @@ const updateUser = async () => {
 };
 
 const userUpdated = updateUser();
+handleSignIn();

@@ -1,8 +1,8 @@
 import supabase from "./../init.js";
-import user from "./../login.js";
+import { handleSignIn } from "./../login.js";
  
 const getJoinedData = async () => {
-  const userLogged = await user;
+  const userLogged = await handleSignIn;
   if (!userLogged) {
     return false;
   }
@@ -18,3 +18,4 @@ const getJoinedData = async () => {
 };
  
 const data = getJoinedData();
+handleSignIn();
