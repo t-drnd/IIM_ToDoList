@@ -321,3 +321,58 @@ export const addTask = async (
     return null;
   }
 };
+
+export const updateTaskStatus = async (taskId: string, newStatus: string) => {
+  try {
+    const { data, error } = await supabaseClient
+      .from("tasks")
+      .update({ status: newStatus })
+      .eq("id", taskId)
+      .select(); // Utilisez .select() pour récupérer les données mises à jour
+
+    if (error) {
+      console.error("Erreur lors de la mise à jour du statut de la tâche :", error);
+      return null;
+    }
+
+    if (!data || data.length === 0) {
+      console.error("Aucune donnée retournée après la mise à jour.");
+      return null;
+    }
+
+    console.log("Statut de la tâche mis à jour avec succès :", data);
+    return data[0]; // Retourne la première tâche mise à jour
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de la tâche :", error);
+    return null;
+  }
+};
+
+export const deleteTask = async (taskId: string) => {
+  try {
+    const { data, error } = await supabaseClient
+      .from("tasks")
+      .delete()
+      .eq("id", taskId)
+      .select(); // Utilisez .select() pour récupérer les données supprimées
+
+    if (error) {
+      console.error("Erreur lors de la suppression de la tâche :", error);
+      return null;
+    }
+
+    if (!data || data.length === 0) {
+      console.error("Aucune donnée retournée après la suppression.");
+      return null;
+    }
+
+    console.log("Tâche supprimée avec succès :", data);
+    return data[0]; // Retourner la première tâche supprimée
+  } catch (error) {
+    console.error("Erreur lors de la suppression de la tâche :", error);
+    return null;
+  }
+};
+
+
+

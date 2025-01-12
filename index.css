@@ -87,6 +87,33 @@
   margin-right: 10px;
 }
 
+#loginlogoutbutton {
+  text-decoration: none;
+  color: #fff;
+}
+
+#loginlogoutbutton button {
+  background: #a8c8e2; 
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Kodchasan";
+  text-decoration: none; 
+}
+
+#loginlogoutbutton button:hover {
+  background: #8bb8d4; 
+  color: #ffffff; 
+  text-decoration: none;
+}
+
+#loginlogoutbutton button:active {
+  background: #78a6bf; 
+  color: #ffffff;
+}
+
 .addtask {
   margin-left: 15px;
   margin-top: 25px;
@@ -303,4 +330,82 @@
   border-radius: 10px;
   font-family: "Kodchasan";
   cursor: pointer;
+}
+
+
+.task-table tbody tr {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  transition: background 0.3s ease;
+}
+
+.task-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.task-table tbody td {
+  padding: 15px;
+  font-family: "Kodchasan";
+  font-size: 14px;
+  color: #6f6f6f;
+}
+
+.task-status {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.task-status.not-started {
+  background: #f4a261;
+  color: #fff;
+}
+
+.task-status.in-progress {
+  background: #2a9d8f;
+  color: #fff;
+}
+
+.task-status.completed {
+  background: #264653;
+  color: #fff;
+}
+
+.task-table tbody tr.completed {
+  background: #f0f0f0;
+  color: #aaa;
+}
+
+.delete-task-button {
+  background: #e63946;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-task-button:disabled {
+  background: #ccc;
+  color: #777;
+  cursor: not-allowed;
+}
+
+.navbar-container li {
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-container li:hover {
+  background-color: #d9d9d9;
+}
+
+.navbar-container li.active {
+  background-color: #8fb9d1;
+  color: white;
+}
+
+.navbar-container li.active:hover {
+  background-color: #8fb9d1; 
 }

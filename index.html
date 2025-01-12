@@ -12,16 +12,18 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-    />
   </head>
   <body>
     <div class="global-container">
       <div class="navbar">
         <h3>ToDo List</h3>
         <ul class="navbar-container">
+          <li class="all-container">
+            <i class="fa-solid fa-list"></i>
+            <p id="all" class="navlip all">Tout voir</p>
+            <div class="numberdiv"></div>
+          </li>
+          <!-- Statuts -->
           <li class="completed-container">
             <i class="navlii fa-solid fa-circle-check"></i>
             <p id="completed" class="navlip completed">Terminé</p>
@@ -76,11 +78,13 @@
             </button>
           </a>
         </div>
+
         <div class="addtask">
           <button class="addtaskbutton" id="addtaskbutton">
             <i class="fa-solid fa-plus"></i>Ajouter une tâche
           </button>
         </div>
+
         <div class="addtaskpopupcontent" id="addtaskpopupcontent">
           <div class="popupoverlay" id="popupoverlay"></div>
           <div class="addtaskpopup" id="addtaskpopup">
@@ -160,14 +164,17 @@
           </div>
         </div>
 
+        <!-- Table des tâches -->
         <div class="task-container">
           <table class="task-table">
             <thead class="task-table-head">
               <tr>
-                <th>Prog.</th>
+                <th>Status</th>
                 <th>Task</th>
+                <th>Description</th>
                 <th>Priority</th>
                 <th>Deadline</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody></tbody>
